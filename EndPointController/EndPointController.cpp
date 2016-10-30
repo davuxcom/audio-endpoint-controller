@@ -27,10 +27,6 @@ HRESULT SetDefaultAudioPlaybackDevice(LPCWSTR devID)
 // EndPointController.exe [NewDefaultDeviceID]
 int _tmain(int argc, _TCHAR* argv[])
 {
-	// read the command line option, -1 indicates list devices.
-	int option = -1;
-	if (argc == 2) option = atoi((char*)argv[1]);
-
 	HRESULT hr = CoInitialize(NULL);
 	if (SUCCEEDED(hr))
 	{
@@ -70,8 +66,8 @@ int _tmain(int argc, _TCHAR* argv[])
 									{
 										// if no options, print the device
 										// otherwise, find the selected device and set it to be default
-										if (option == -1) printf("Audio Device %d: %ws\n",i, friendlyName.pwszVal);
-										if (i == option) SetDefaultAudioPlaybackDevice(wstrID);
+										if (argc != 2) printf("Audio Device %d: %ws\n", i, friendlyName.pwszVal);
+										else if (_tcscmp(friendlyName.pwszVal, argv[1]) == 0) SetDefaultAudioPlaybackDevice(wstrID);
 										PropVariantClear(&friendlyName);
 									}
 									pStore->Release();
