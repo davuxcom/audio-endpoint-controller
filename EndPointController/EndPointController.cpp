@@ -66,7 +66,7 @@ int _tmain(int argc, _TCHAR* argv[])
 									{
 										// if no options, print the device
 										// otherwise, find the selected device and set it to be default
-										if (argc != 2) printf("Audio Device %d: %ws\n", i, friendlyName.pwszVal);
+										if (argc != 2) printf("Audio Device %d: \"%ws\"\n", i, friendlyName.pwszVal);
 										else if (_tcscmp(friendlyName.pwszVal, argv[1]) == 0) SetDefaultAudioPlaybackDevice(wstrID);
 										PropVariantClear(&friendlyName);
 									}
